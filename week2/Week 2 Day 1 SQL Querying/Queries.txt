@@ -1,0 +1,21 @@
+Write a query to insert any 5 records into the 'building_type' table.
+
+insert into building_type values(1501,"b51",220),
+(121,"b21",210),
+(1011,"b12",2120),
+(1101,"b14",2210),
+(1031,"2b1",2120);
+
+
+Write a query to change the name 'Shopping Mall' to 'Mall' in the building_type table.
+
+update building_type 
+set name = 'Mall'
+where name = 'Shopping Mall';
+
+
+Write a query to delete the rows from the table 'building_type' where the electricity connection is home .
+Hint: The connection_type_id for home is 1.
+
+delete from building_type
+where connection_type_id = 1;
