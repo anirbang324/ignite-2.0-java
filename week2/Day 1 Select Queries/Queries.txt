@@ -1,0 +1,80 @@
+1. Write a query to display the entire contents of the 'electricity_connection_type'.Display the records in ascending order based on their connection name.
+
+select * from electricity_connection_type order by connection_name;
+
+
+2. Write a query to display the entire contents of the building_type table, sorted by name in ascending order.
+
+select * from building_type order by name;
+
+
+3. Write a query to display the entire contents of the 'building'.Display the records in ascending order based on owner name.
+
+select * from building order by owner_name;
+
+
+4. Write a query to display the entire contents of the  'electricity_reading', Display the records in descending order based on 'total_units'.
+
+select * from electricity_reading order by total_units desc;
+
+
+5. Write a query to display all 'meter_number' from meter table.
+
+select meter_number from meter;
+
+
+6. Write a query to display the owner_name and contact_number of all building, Display the records in ascending order based on owner_name.
+
+select  owner_name, contact_number from building order by owner_name;
+
+
+7. Write a query to display the entire contents of the slab table, sorted by from_unit in ascending order.
+
+select * from slab order by from_unit asc;
+
+
+8. Write a query to display the entire details of the building whose building_type_id is 2, sorted by owner_name in ascending order.
+
+select * from building where building_type_id =2 order by owner_name;
+
+
+9. Write a query to display the owner name and the length of the owner's name of the buildings.Display the records in ascending order based on owner name. Give an alias as name_length to the length of the owner names.
+Use the inbuilt function length().
+
+select owner_name , length(owner_name) as 'name_length' from building order by owner_name asc;
+
+
+10. Write a query to display all the owner_name and the concatenated contact_number and email  with hyphen(-) seperated . Display the records in descending order based on owner_name .Give an alias name as contact_details.
+
+SELECT owner_name, CONCAT(contact_number, '-', email_address) AS contact_details
+FROM building
+ORDER BY owner_name DESC; 
+
+
+11. Write a query to display the first 3 characters of every meter_number.Give an alias name for the meter number as 'meter_code'.Display the records sorted by meter_code in descending order.
+
+Use the inbuilt function substr().
+
+select substring(meter_number,1,3) as meter_code from meter order by meter_code desc; 
+
+
+12. Write a query to display the first 3 characters of the owner names and the contact number of all buildings in ascending order based on the owner name of the building. Give an alias to the first 3 characters as 'name_code'.
+
+Use the inbuilt function left().
+
+select substring(owner_name,1,3) as 'name_code' ,contact_number from building order by owner_name asc;
+
+
+13. Write a query to display the name of all building types that ends with letter 'L'.Display the record in ascending order based on building type name.
+
+select name from building_type where name like '%L' order by name asc; 
+
+
+14. Write a query to display all the details of the buildings whose owner name contains 'di' in it. Display the records sorted in ascending order based on the owner name of the building.
+
+select * from building where owner_name like '%di%' order by owner_name;
+
+
+15. Write a query to display the due date and  payable amount  of all the payment dates that are all not fall in between '2017-09-10' to '2017-10-10'.
+
+select due_date, payable_amount from bill where payment_date not between '2017-09-10' and '2017-10-10';
