@@ -75,3 +75,8 @@ select due_date, payable_amount from bill where payment_date not between '2017-0
 
 16. Write a query to display the due_date ,payment_date,difference betweeen the due date and the payment date of the bill in days and amount paid, whose payment  date is not exceeding the  due date.Give an alias name for difference betweeen the due date and the payment date as 'date_difference'.
 
+SELECT due_date, payment_date, DATEDIFF( due_date,payment_date) AS date_difference, payable_amount
+
+FROM bill
+
+WHERE payment_date <= due_date;
