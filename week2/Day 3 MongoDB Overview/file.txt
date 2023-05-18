@@ -1,0 +1,74 @@
+Write a query to insert two documents into 'books' collection.
+
+db.books.insertMany(
+  [{"_id" : 122 ,"title": "aed", "author_id": 31,  "published_date": 2000, "pages" : 67 , "language": "English", "price": 10.56}, 
+   {"_id" : 133, "title": "ddcf", "author_id": 22,  "published_date": 2001, "pages" : 121 , "language": "Bengali", "price": 20.34}])
+
+
+Write a query to insert two documents into 'publisher' collection.
+
+db.publisher.insertMany([{
+              "id": 12, "pub_name":"abc", "country":"India"},
+                {"id": 13, "pub_name":"def", "country":"England"}])
+
+
+
+Write a query to insert 2 documents into 'author' collection.
+
+db.author.insertMany(
+  [{"id" : 12 , "author_name" : "Anirban","age" : 24,"gender" : "Male","email_id" : "ani421@gmail.com",
+   "phoneno" : "945453321" ,"address" : "kolkata"},
+   {"id" : 13 , "author_name" : "Ani","age" : 23,"gender" : "Male","email_id" : "ani4@gmail.com",
+   "phoneno" : "943454561" ,"address" : "delhi"}])
+
+
+
+ Write a query to update the language from 'Hindi' to 'Sanskrit' of the books document with _id value equal to 77.
+
+ db.books.updateOne({ "_id": 77 },{ $set: { "language": "Sanskrit" }})
+
+
+
+ Write a query to update the published_date to '2010-10-24' of all the books published by the publisher_id equal to 201.
+
+ db.books.updateMany(
+   { "publisher_id": 201 },
+   { $set: { "published_date": ISODate("2010-10-24") } }
+)
+
+
+
+Write a query to delete the document with _id value equal to 201 present in the 'author' collection.
+
+db.author.deleteOne(
+   "{_id": 201})
+
+
+Write a query to delete all the documents present in the 'publisher' collection.
+
+db.publisher.drop()
+
+
+ Write a query to delete the documents with publisher_id equal to 201 present in the 'books' collection.
+
+ db.books.deleteOne(
+   {"publisher_id": 201})
+
+
+Write a query to rename the fields 'email_id' to 'mail' and 'phoneno' to 'mobile' of the document with _id 41 which is present in the author collection.
+
+
+db.author.update({"_id": 41},
+{$rename:{
+    "email_id" : "mail", "phoneno" : "mobile"
+}})
+
+
+Write a query to update name of the publisher to 'UniversityPress' and country to 'US' of the document _id value equal to 203. Suppose if the publisher document _id 203 does not exists, then insert new document with _id 203, the publisher name as 'UniversityPress' and country as 'US'.
+
+db.publisher.updateOne(
+  { _id: 203 },
+  {$rename:
+  { "pub_name": "UniversityPress", "country": "US"  }},
+  { upsert: true }
+)
