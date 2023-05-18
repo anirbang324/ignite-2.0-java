@@ -63,12 +63,11 @@ order by b.owner_name asc;
 
 7. Write a query to display the building type name and the number of buildings under the type which has maximum number of buildings.Give an alias name as number_of_buildings. If there are multiple records sort in ascending order by name.
 
-select cv.name , count(cv.id) as number_of_buildings  
-from building zx
-inner join building_type cv on cv.id=zx.building_type_id
-group by cv.id
-order by cv.name asc;
-
+select bt.name , count(bt.id) as number_of_buildings  
+from building bg
+inner join building_type bt on bt.id=bg.building_type_id
+group by bt.id
+order by bt.name asc;
 
 8. Write a query to display the meter number,owner name and address of the owner who paid fine most number of times.Display the records in ascending order based on owner name.
 
