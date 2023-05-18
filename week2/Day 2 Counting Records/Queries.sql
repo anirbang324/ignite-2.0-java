@@ -85,4 +85,5 @@ select count(*) as count_of_bills_with_payment from bill where is_payed !=0;
 
 16. Write a query to display the number of electricity reading in which the total units per day is greater than 500.Give an alias name as 'count_total_units_500'.
 
-
+select count(*) as count_total_units_500 from electricity_reading
+where total_units >500;
