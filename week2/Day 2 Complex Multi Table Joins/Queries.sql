@@ -59,3 +59,52 @@ join  meter m on b.id=m.building_id
 join  bill bi on m.id=bi.meter_id
 where bi.month=12 and bi.year=2017
 order by b.owner_name asc;
+
+
+7. Write a query to display the building type name and the number of buildings under the type which has maximum number of buildings.Give an alias name as number_of_buildings. If there are multiple records sort in ascending order by name.
+
+select cv.name , count(cv.id) as number_of_buildings  
+from building zx
+inner join building_type cv on cv.id=zx.building_type_id
+group by cv.id
+order by cv.name asc;
+
+
+8. Write a query to display the meter number,owner name and address of the owner who paid fine most number of times.Display the records in ascending order based on owner name.
+
+SELECT m.meter_number, xc.owner_name, xc.address
+FROM building xc
+JOIN meter m ON m.building_id = xc.id
+JOIN bill b ON m.id = b.meter_id
+where b.is_payed>0 and b.fine_amount>0 
+group by m.meter_number
+ORDER BY count(b.id) desc,  xc.owner_name ASC
+limit 1;
+
+
+9. Write a query to display the meter number,owner name and address of the owner who paid second least  fine amount.Display the records in ascending order based on owner name.
+
+select  m.meter_number , bd1.owner_name ,bd1.address
+from building bd1
+join meter m on bd1.id= m.building_id
+join bill b on m.id=b.meter_id
+where b.fine_amount in 
+(select min(b1.fine_amount) from bill b1 where b1.fine_amount >
+(select min(b2.fine_amount) from bill b2))
+order by bd1.owner_name asc;
+
+
+10. Write a query to display the meter number ,total unit, payable amount and hourly usage of by  morning ,Afternoon ,Evening and Night for the month December 2017 of each meter. Display the record in descending order by total units.
+Note : Give alias name as month_total_unit for monthly total  unit, 6 to 11 as Morning give an alias name as morning,12 to 15 as Afternoon give an alias name as afternoon,16 to 19 as Evening give an alias name as evening and remaining as Night give an alias name as night .
+
+select m.meter_number , sum(er.total_units) as month_total_unit , b.payable_amount , 
+sum(er.h6+er.h7+er.h8+er.h9+er.h10+er.h11) as morning , 
+sum(er.h12+er.h13+er.h14+er.h15) as afternoon,
+sum(er.h16+er.h17+er.h18+er.h19) as evening,
+sum(er.h20+er.h21+er.h22+er.h23+er.h24+er.h1+er.h2+er.h3+er.h4+er.h5) as night
+from electricity_reading er 
+join meter m on m.id= er.meter_id
+join bill b on b.meter_id=m.id
+where b.month = 12 and b.year=2017 
+group by m.meter_number
+order by month_total_unit desc;
