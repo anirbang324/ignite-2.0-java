@@ -1,0 +1,7 @@
+CREATE TABLE orders_products (
+		order_id INT NULL,
+		product_id INT NULL,
+		FOREIGN KEY(order_id) REFERENCES orders(id),
+		PRIMARY KEY(order_id, product_id)
+);
+
